@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "ink": "^2.3.0",
+    "node-fetch": "^2.6.0",
+    "react": "^16.8.6"
+  },
+  "name": "check-system-service",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Sly321/check-system-service.git",
+  "author": "Sven Liebig <liebigsv@gmail.com>",
+  "license": "MIT"
+}
