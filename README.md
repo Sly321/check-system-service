@@ -11,3 +11,8 @@ TODO
 |||
 |-|-|
 | parallel | TODO implement |
+
+## todo
+
+> module discovery service
+> package json für description, name etc
