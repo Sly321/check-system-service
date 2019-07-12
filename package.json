@@ -9,5 +9,8 @@
   "main": "index.js",
   "repository": "git@github.com:Sly321/check-system-service.git",
   "author": "Sven Liebig <liebigsv@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "import-jsx": "^2.0.0"
+  }
 }
