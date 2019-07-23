@@ -1,7 +1,8 @@
-import React, { FC, useEffect, useState } from "react"
-import { render, Color, Box } from "ink"
+import { Box, Color, render } from "ink"
+import React, { useEffect, useState } from "react"
+import { isJsxAble, JsxAble } from "./utils/jsxAble"
 import { loadModule } from "./utils/loadModule"
-import { JsxAble, isJsxAble } from "./utils/jsxAble"
+import Check from "./components/check"
 
 function Counter() {
 	let [counter, setCounter] = useState(0)
@@ -16,7 +17,7 @@ function Counter() {
 
 		(async function() {
 			try {
-				const mod = await loadModule("is-google-down-examples")
+				const mod = await loadModule("is-google-down-example")
 				setModuleState(mod)
 			} catch(e) {
 				setError(e)
@@ -41,13 +42,17 @@ function Counter() {
 		</React.Fragment>
 	}
 
-	return (
+	return (<React.Fragment>
 		<Box>
 			<Color green>
 				{counter} tests passed
 			</Color>
-			{typeof moduleState === "boolean" ? `Module${moduleState ? "" : "not"} exists` : moduleState}
 		</Box>
+		<Box><Check /> Module loaded</Box>
+		<Box>
+			{typeof moduleState === "boolean" ? `Module${moduleState ? "" : "not"} exists` : JSON.stringify(moduleState, null, 2)}
+		</Box>
+	</React.Fragment>
 	)
 }
 
