@@ -1,36 +1,39 @@
 'use strict';
 
 const React = require('react');
-const {render, Color} = require('ink');
+const { loadModule } = require("./utils/loadModule");
+const { render, Color } = require('ink');
 
-class Counter extends React.Component {
-	constructor() {
-		super();
+function Counter() {
+	let [counter, setCounter] = React.useState(0)
+	let [moduleState, setModuleState] = React.useState("loading...")
 
-		this.state = {
-			counter: 0
-		};
-	}
-
-	render() {
-		return (
-			<Color green>
-				{this.state.counter} tests passed
-			</Color>
-		);
-	}
-
-	componentDidMount() {
-		this.timer = setInterval(() => {
-			this.setState(prevState => ({
-				counter: prevState.counter + 1
-			}));
+	
+	React.useLayoutEffect(() => {
+		const timer = setInterval(() => {
+			setCounter(counter++)
 		}, 100);
-	}
 
-	componentWillUnmount() {
-		clearInterval(this.timer);
-	}
+		(async function() {
+			try {
+				const mod = await loadModule("is-google-down-examples")
+				setModuleState(mod)
+			} catch(e) {
+				setModuleState(e.message)
+			}
+		})()
+
+		return () => clearInterval(timer);
+	}, [])
+
+	return (
+		<React.Fragment>
+			<Color green>
+				{counter} tests passed
+			</Color>
+			{typeof moduleState === "boolean" ? `Module${moduleState ? "" : "not"} exists` : moduleState}
+		</React.Fragment>
+	)
 }
 
 render(<Counter/>);
