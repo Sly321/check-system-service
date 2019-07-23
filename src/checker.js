@@ -9,7 +9,8 @@ function Counter() {
 	let [moduleState, setModuleState] = React.useState("loading...")
 
 	
-	React.useLayoutEffect(() => {
+	// useModule or something 
+	React.useEffect(() => {
 		const timer = setInterval(() => {
 			setCounter(counter++)
 		}, 100);
