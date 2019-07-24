@@ -1,12 +1,10 @@
-function wait(ms) {
+function wait(ms: number) {
 	return new Promise(res => {
 		setTimeout(res, ms)
 	})
 }
 
-const checker = async function() {
+export default async function() {
 	await wait(1000)
 	return true
 }
-
-module.exports = checker

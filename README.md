@@ -16,3 +16,6 @@ TODO
 
 > module discovery service
 > package json für description, name etc
+> * mehr sachen
+> * * json etc
+> prettify shit

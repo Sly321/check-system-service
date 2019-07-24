@@ -3,10 +3,11 @@ import React, { useEffect, useState } from "react"
 import { isJsxAble, JsxAble } from "./utils/jsxAble"
 import { loadModule } from "./utils/loadModule"
 import Check from "./components/check"
+import Loading from "./components/loading"
 
 function Counter() {
 	let [counter, setCounter] = useState(0)
-	let [moduleState, setModuleState] = useState<any>("loading...")
+	let [moduleState, setModuleState] = useState<any>(null)
 	let [error, setError] = useState<null | JsxAble | Error>()
 	
 	// useModule or something 
@@ -42,18 +43,30 @@ function Counter() {
 		</React.Fragment>
 	}
 
-	return (<React.Fragment>
-		<Box>
-			<Color green>
-				{counter} tests passed
-			</Color>
-		</Box>
-		<Box><Check /> Module loaded</Box>
-		<Box>
-			{typeof moduleState === "boolean" ? `Module${moduleState ? "" : "not"} exists` : JSON.stringify(moduleState, null, 2)}
-		</Box>
-	</React.Fragment>
-	)
+	if (moduleState) {
+		return (<React.Fragment>
+			<Box>
+				<Color green>
+					{counter} tests passed
+				</Color>
+			</Box>
+			<Box><Check /> Module loaded: {moduleState.name}</Box>
+			<Box>
+				Prepare to executing steps:
+			</Box>
+			<Box paddingLeft={2}>
+				{moduleState.steps.map((step: string) => `- ${step}`)}
+			</Box>
+			<Execute bla={moduleState.steps} />
+		</React.Fragment>
+		)
+	}
+
+	return <Box>loading...</Box>
+}
+
+function Execute({ bla }: { bla: Array<string>}) {
+	return <>{bla.map(b => <Box><Loading /> {b}</Box>)}</>
 }
 
 render(<Counter/>);
