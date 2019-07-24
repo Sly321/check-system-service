@@ -19,3 +19,4 @@ TODO
 > * mehr sachen
 > * * json etc
 > prettify shit
+> `require("ts-node/register")` [https://www.npmjs.com/package/ts-node](https://www.npmjs.com/package/ts-node)
